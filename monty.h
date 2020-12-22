@@ -68,6 +68,7 @@ void op_nop(stack_t **st, unsigned int linecounter);
 
 /*auxfunctions_3.c*/
 void op_add(stack_t **, unsigned int);
+void op_sub(stack_t **, unsigned int);
 
 storage_t strge;
 
