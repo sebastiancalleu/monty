@@ -9,7 +9,7 @@ void op_pchar(stack_t **st, unsigned int linecounter)
 		freeall(st);
 		exit(EXIT_FAILURE);
 	}
-	if ((*st)->n <= 0 || (*st)->n > 127)
+	if ((*st)->n <= 0 || (*st)->n > 128)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n", linecounter);
 		free(strge.bufcop);
