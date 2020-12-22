@@ -75,6 +75,7 @@ void (*get_op_func(char *s, unsigned int linecounter))(stack_t **st, unsigned in
 	{"add", op_add},
 	{"nop", op_nop},
 	{"sub", op_sub},
+	{"div", op_div},
 	{NULL, NULL}
 	};
 	int i = 0;
@@ -101,9 +102,9 @@ void op_push(stack_t **st, unsigned int linecounter)
 		exit(EXIT_FAILURE);
 	}
 	a = atoi(strge.arr_of_buff[1]);
-	if((a == 0 && (strge.arr_of_buff[1][1] != '0')) || (countdigs(a) != strlen(strge.arr_of_buff[1])) || !a)
+	if(countdigs(a) != strlen(strge.arr_of_buff[1]))
 	{
-		printf("L%d: usage: push integer\n", linecounter);
+		printf("L%d: usage: pusaaah integer\n", linecounter);
 		free(strge.bufcop);
 		freeall(st);
 		exit(EXIT_FAILURE);

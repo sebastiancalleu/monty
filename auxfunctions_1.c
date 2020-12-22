@@ -43,6 +43,8 @@ unsigned int countdigs(int a)
 {
 	unsigned int count = 0;
 
+	if (a == 0)
+		return (1);
 	while (a != 0)
 	{
 		a = a / 10;
