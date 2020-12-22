@@ -42,6 +42,7 @@ typedef struct instruction_s
 typedef struct storage_s
 {
         char **arr_of_buff;
+		char *bufcop;
 } storage_t;
 
 /* auxfunctions.c */
@@ -57,6 +58,10 @@ void free_arr(char **, int n);
 void freelist(stack_t **);
 unsigned int countdigs(int);
 void op_pint(stack_t **, unsigned int);
+
+/*auxfunctions_2.c*/
+void freeall(stack_t **);
+void op_pop(stack_t **st, unsigned int linecounter);
 
 storage_t strge;
 

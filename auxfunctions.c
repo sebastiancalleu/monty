@@ -16,6 +16,7 @@ int openfile(char **argv, stack_t **st)
 	while (getline(&buffer, &bufflen, fp) != -1)
 	{
 		linecounter++;
+		strge.bufcop = buffer;
 		executor(buffer, st, linecounter);
 	}
 	if (st != NULL)
@@ -69,6 +70,7 @@ void (*get_op_func(char *s, unsigned int linecounter))(stack_t **st, unsigned in
 	{"push", op_push},
 	{"pall", op_pall},
 	{"pint", op_pint},
+	{"pop", op_pop},
 	{NULL, NULL}
 	};
 	int i = 0;
@@ -90,12 +92,16 @@ void op_push(stack_t **st, unsigned int linecounter)
 	if (!strge.arr_of_buff[1])
 	{
 		printf("L%d: usage: push integer\n", linecounter);
+		free(strge.bufcop);
+		freeall(st);
 		exit(EXIT_FAILURE);
 	}
 	a = atoi(strge.arr_of_buff[1]);
 	if((a == 0 && (strge.arr_of_buff[1][1] != '0')) || (countdigs(a) != strlen(strge.arr_of_buff[1])) || !a)
 	{
 		printf("L%d: usage: push integer\n", linecounter);
+		free(strge.bufcop);
+		freeall(st);
 		exit(EXIT_FAILURE);
 	}
 

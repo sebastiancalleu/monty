@@ -13,6 +13,7 @@ int wrdcounter(char *str)
 	}
 	return (b);
 }
+
 void free_arr(char **array, int n)
 {
 	int a = 0;
