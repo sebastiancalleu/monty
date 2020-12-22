@@ -9,7 +9,10 @@ int openfile(char **argv, stack_t **st)
 
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		return (EXIT_FAILURE);
+	}
 	while (getline(&buffer, &bufflen, fp) != -1)
 	{
 		linecounter++;
@@ -33,21 +36,29 @@ void executor(char *buffer, stack_t **st, unsigned int linecounter)
 	token = strtok(buffer, delim);
 	strge.arr_of_buff = malloc((n + 1) * sizeof(char));
 	if (strge.arr_of_buff == NULL)
-		exit(0);
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	while(token != NULL)
 	{
 		strge.arr_of_buff[a] = malloc((strlen(token) + 1) * sizeof(char));
+		if (strge.arr_of_buff[a] == NULL)
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			exit(EXIT_FAILURE);
+		}
 		strcpy(strge.arr_of_buff[a], token);
 		token = strtok(NULL, delim);
 		a++;
 	}
 	strge.arr_of_buff[a] = NULL;
-	get_op_func(strge.arr_of_buff[0])(st, linecounter);
+	get_op_func(strge.arr_of_buff[0], linecounter)(st, linecounter);
 	free_arr(strge.arr_of_buff, n);
 	free (strge.arr_of_buff);
 }
 
-void (*get_op_func(char *s))(stack_t **st, unsigned int linecounter)
+void (*get_op_func(char *s, unsigned int linecounter))(stack_t **st, unsigned int linecounter)
 {
 	instruction_t ops[] = {
 	{"push", op_push},
@@ -62,7 +73,7 @@ void (*get_op_func(char *s))(stack_t **st, unsigned int linecounter)
 			return (ops[i].f);
 		i++;
 	}
-	printf("Error\n");
+	fprintf(stderr, "L<%u>: unknown instruction <%s>\n", linecounter, s);
 	exit(99);
 	return (NULL);
 }
@@ -70,15 +81,25 @@ void (*get_op_func(char *s))(stack_t **st, unsigned int linecounter)
 void op_push(stack_t **st, unsigned int linecounter)
 {
 	stack_t *new = NULL;
-	int a = atoi(strge.arr_of_buff[1]);
-
-	if((a == 0 && (strge.arr_of_buff[1][1] != '0')) || (countdigs(a) != strlen(strge.arr_of_buff[1])))
+	int a;
+	if (!strge.arr_of_buff[1])
+	{
+		printf("L<%d>: usage: push integer\n", linecounter);
+		exit(EXIT_FAILURE);
+	}
+	a = atoi(strge.arr_of_buff[1]);
+	if((a == 0 && (strge.arr_of_buff[1][1] != '0')) || (countdigs(a) != strlen(strge.arr_of_buff[1])) || !a)
 	{
 		printf("L<%d>: usage: push integer\n", linecounter);
 		exit(EXIT_FAILURE);
 	}
 
 	new = malloc(sizeof(stack_t));
+	if (new == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	new->n = a;
 	new->prev = NULL;
 	new->next = *st;

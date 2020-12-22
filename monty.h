@@ -47,7 +47,7 @@ typedef struct storage_s
 /* auxfunctions.c */
 int openfile(char **, stack_t **);
 void executor(char *, stack_t **, unsigned int);
-void (*get_op_func(char *))(stack_t **, unsigned int);
+void (*get_op_func(char *, unsigned int linecounter))(stack_t **, unsigned int);
 void op_push(stack_t **, unsigned int);
 void op_pall(stack_t **, unsigned int);
 
