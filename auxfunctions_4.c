@@ -48,3 +48,23 @@ void op_pstr(stack_t **st, unsigned int linecounter)
 		putchar('\n');
 	}
 }
+
+void op_rotl(stack_t **st, unsigned int linecounter)
+{
+	int a, b;
+	stack_t *tmp;
+
+	(void)linecounter;
+	tmp = *st;
+	b = tmp->n;
+	for (a = 0; tmp != NULL; a++)
+	{
+		if (tmp->next == NULL)
+		{
+			tmp->n = b;
+			break;
+		}
+		tmp->n = tmp->next->n;
+		tmp = tmp->next;
+	}
+}
