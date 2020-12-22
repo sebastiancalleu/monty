@@ -60,7 +60,7 @@ void executor(char *buffer, stack_t **st, unsigned int linecounter)
 	}
 	strge.arr_of_buff[a] = NULL;
 	if (strncmp(strge.arr_of_buff[0], "#", 1) != 0)
-		get_op_func("#", linecounter)(st, linecounter);
+		get_op_func("nop", linecounter)(st, linecounter);
 	get_op_func(strge.arr_of_buff[0], linecounter)(st, linecounter);
 	free_arr(strge.arr_of_buff, n);
 	free (strge.arr_of_buff);
@@ -80,7 +80,7 @@ void (*get_op_func(char *s, unsigned int linecounter))(stack_t **st, unsigned in
 	{"div", op_div},
 	{"mul", op_mul},
 	{"mod", op_mod},
-	{"#", op_comm},
+	{"pchar", op_pchar},
 	{NULL, NULL}
 	};
 	int i = 0;
