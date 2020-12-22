@@ -42,17 +42,16 @@ void op_div(stack_t **st, unsigned int linecounter)
 {
 	stack_t *tmp1 = NULL;
 
-	if ((*st)->n == 0)
+	if (stackelements(st) < 2)
 	{
-		fprintf(stderr, "L%d: division by zero\n", linecounter);
+		fprintf(stderr, "L%d: can't div, stack too short\n", linecounter);
 		free(strge.bufcop);
 		freeall(st);
 		exit(EXIT_FAILURE);
 	}
-
-	if (stackelements(st) < 2)
+	if ((*st)->n == 0)
 	{
-		fprintf(stderr, "L%d: can't div, stack too short\n", linecounter);
+		fprintf(stderr, "L%d: division by zero\n", linecounter);
 		free(strge.bufcop);
 		freeall(st);
 		exit(EXIT_FAILURE);
