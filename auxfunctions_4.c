@@ -4,7 +4,7 @@ void op_pchar(stack_t **st, unsigned int linecounter)
 {
 	if (*st == NULL)
 	{
-		fprintf(stderr, "L%d: can't pchar, stack emptyn", linecounter);
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", linecounter);
 		free(strge.bufcop);
 		freeall(st);
 		exit(EXIT_FAILURE);
