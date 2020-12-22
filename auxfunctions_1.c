@@ -49,3 +49,13 @@ unsigned int countdigs(int a)
 	}
 	return (count);
 }
+
+void op_pint(stack_t **st, unsigned int linecounter)
+{
+	if (*st == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", linecounter);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*st)->n);
+}

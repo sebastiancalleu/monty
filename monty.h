@@ -56,6 +56,7 @@ int wrdcounter(char *);
 void free_arr(char **, int n);
 void freelist(stack_t **);
 unsigned int countdigs(int);
+void op_pint(stack_t **, unsigned int);
 
 storage_t strge;
 

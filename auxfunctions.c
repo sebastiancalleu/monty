@@ -24,8 +24,6 @@ int openfile(char **argv, stack_t **st)
 	if (buffer)
 		free(buffer);
 		buffer = NULL;
-	/*free_arr(strge.arr_of_buff);
-	free (strge.arr_of_buff);*/
 	exit(EXIT_SUCCESS);
 }
 
@@ -70,6 +68,7 @@ void (*get_op_func(char *s, unsigned int linecounter))(stack_t **st, unsigned in
 	instruction_t ops[] = {
 	{"push", op_push},
 	{"pall", op_pall},
+	{"pint", op_pint},
 	{NULL, NULL}
 	};
 	int i = 0;
