@@ -17,7 +17,6 @@ int wrdcounter(char *str)
 void free_arr(char **array, int n)
 {
 	int a = 0;
-
 	for (a = 0; a < n; a++)
 	{
 		free(array[a]);

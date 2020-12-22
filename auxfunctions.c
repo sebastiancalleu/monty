@@ -23,16 +23,19 @@ int openfile(char **argv, stack_t **st)
 	fclose(fp);
 	if (buffer)
 		free(buffer);
+		buffer = NULL;
 	exit(EXIT_SUCCESS);
 }
 
 void executor(char *buffer, stack_t **st, unsigned int linecounter)
 {
-	char *token = NULL;
+	char *token;
 	char *delim = " \n";
 	int a = 0, n = 0;
 
 	n = wrdcounter(buffer);
+	if (n > 2)
+		n = 2;
 	token = strtok(buffer, delim);
 	strge.arr_of_buff = malloc((n + 1) * sizeof(char));
 	if (strge.arr_of_buff == NULL)
@@ -51,6 +54,8 @@ void executor(char *buffer, stack_t **st, unsigned int linecounter)
 		strcpy(strge.arr_of_buff[a], token);
 		token = strtok(NULL, delim);
 		a++;
+		if (a == n)
+			break;
 	}
 	strge.arr_of_buff[a] = NULL;
 	get_op_func(strge.arr_of_buff[0], linecounter)(st, linecounter);
@@ -73,9 +78,8 @@ void (*get_op_func(char *s, unsigned int linecounter))(stack_t **st, unsigned in
 			return (ops[i].f);
 		i++;
 	}
-	fprintf(stderr, "L<%u>: unknown instruction <%s>\n", linecounter, s);
-	exit(99);
-	return (NULL);
+	fprintf(stderr, "L%u: unknown instruction %s\n", linecounter, s);
+	exit(EXIT_FAILURE);
 }
 
 void op_push(stack_t **st, unsigned int linecounter)
@@ -84,13 +88,13 @@ void op_push(stack_t **st, unsigned int linecounter)
 	int a;
 	if (!strge.arr_of_buff[1])
 	{
-		printf("L<%d>: usage: push integer\n", linecounter);
+		printf("L%d: usage: push integer\n", linecounter);
 		exit(EXIT_FAILURE);
 	}
 	a = atoi(strge.arr_of_buff[1]);
 	if((a == 0 && (strge.arr_of_buff[1][1] != '0')) || (countdigs(a) != strlen(strge.arr_of_buff[1])) || !a)
 	{
-		printf("L<%d>: usage: push integer\n", linecounter);
+		printf("L%d: usage: push integer\n", linecounter);
 		exit(EXIT_FAILURE);
 	}
 
@@ -111,16 +115,13 @@ void op_pall(stack_t **st, unsigned int linecounter)
 	int a = 0;
 	stack_t *tmp = NULL;
 
-	if (strge.arr_of_buff[1] != NULL)
+	if (linecounter != 0)
 	{
-		printf("L<%d>: usage: push integer\n", linecounter);
-		exit(EXIT_FAILURE);
-	}
-
-	tmp = *st;
-	for (a = 0; tmp != NULL; a++)
-	{
-		printf("%d\n", tmp->n);
-		tmp = tmp->next;
+		tmp = *st;
+		for (a = 0; tmp != NULL; a++)
+		{
+			printf("%d\n", tmp->n);
+			tmp = tmp->next;
+		}
 	}
 }
