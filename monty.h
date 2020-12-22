@@ -75,6 +75,7 @@ void op_mod(stack_t **, unsigned int);
 
 /*auxfunctions_4.c*/
 void op_pchar(stack_t **, unsigned int);
+void op_pstr(stack_t **, unsigned int);
 
 storage_t strge;
 

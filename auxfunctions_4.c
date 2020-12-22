@@ -19,3 +19,29 @@ void op_pchar(stack_t **st, unsigned int linecounter)
 	putchar((*st)->n);
 	putchar('\n');
 }
+
+void op_pstr(stack_t **st, unsigned int linecounter)
+{
+	int a;
+	stack_t *tmp;
+
+	(void)linecounter;
+	tmp = *st;
+	if (*st == NULL)
+	{
+		putchar('\n');
+	}
+	for (a = 0; tmp != NULL; a++)
+	{
+		if (tmp->n > 0 && tmp->n < 127)
+		{
+			putchar(tmp->n);
+			tmp = tmp->next;
+		}
+		else
+		{
+			break;
+		}
+	}
+	putchar('\n');
+}
