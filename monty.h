@@ -61,7 +61,9 @@ void op_pint(stack_t **, unsigned int);
 
 /*auxfunctions_2.c*/
 void freeall(stack_t **);
-void op_pop(stack_t **st, unsigned int linecounter);
+void op_pop(stack_t **, unsigned int);
+void op_swap(stack_t **, unsigned int);
+int stackelements(stack_t **);
 
 storage_t strge;
 
