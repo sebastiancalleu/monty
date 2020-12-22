@@ -56,3 +56,12 @@ int stackelements(stack_t **st)
 	}
 	return (a);
 }
+
+void op_nop(stack_t **st, unsigned int linecounter)
+{
+	if (st)
+	{}
+	if (linecounter)
+	{}
+}
+

@@ -64,6 +64,7 @@ void freeall(stack_t **);
 void op_pop(stack_t **, unsigned int);
 void op_swap(stack_t **, unsigned int);
 int stackelements(stack_t **);
+void op_nop(stack_t **st, unsigned int linecounter);
 
 storage_t strge;
 
