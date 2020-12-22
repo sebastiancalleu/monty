@@ -68,3 +68,31 @@ void op_rotl(stack_t **st, unsigned int linecounter)
 		tmp = tmp->next;
 	}
 }
+
+void op_rotr(stack_t **st, unsigned int linecounter)
+{
+	int a;
+	stack_t *tmp, *tmp1;
+
+	(void)linecounter;
+	tmp = *st;
+	for (a = 0; tmp->next != NULL; a++)
+	{
+		tmp = tmp->next;
+	}
+	*st = tmp;
+	for (a = 0; tmp != NULL; a++)
+	{
+		tmp->next = tmp->prev;
+		tmp = tmp->next;
+	}
+	(*st)->prev = NULL;
+	tmp = *st;
+	for (a = 0; tmp != NULL; a++)
+	{
+		tmp1 = tmp;
+		tmp = tmp->next;
+		if (tmp != NULL)
+			tmp->prev = tmp1;
+	}
+}

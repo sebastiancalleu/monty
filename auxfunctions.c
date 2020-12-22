@@ -83,6 +83,8 @@ void (*get_op_func(char *s, unsigned int linecounter))(stack_t **st, unsigned in
 	{"pchar", op_pchar},
 	{"pstr", op_pstr},
 	{"rotl", op_rotl},
+	{"rotr", op_rotr},
+
 	{NULL, NULL}
 	};
 	int i = 0;
