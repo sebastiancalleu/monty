@@ -20,6 +20,7 @@ void op_pop(stack_t **st, unsigned int linecounter)
 	}
 	tmp = *st;
 	(*st) = (*st)->next;
+	if (tmp->next)
+		(*st)->prev = NULL;
 	free(tmp);
-	(*st)->prev = NULL;
 }
