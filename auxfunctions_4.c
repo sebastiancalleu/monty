@@ -31,17 +31,20 @@ void op_pstr(stack_t **st, unsigned int linecounter)
 	{
 		putchar('\n');
 	}
-	for (a = 0; tmp != NULL; a++)
+	else
 	{
-		if (tmp->n > 0 && tmp->n < 127)
+		for (a = 0; tmp != NULL; a++)
 		{
-			putchar(tmp->n);
-			tmp = tmp->next;
+			if (tmp->n > 0 && tmp->n < 127)
+			{
+				putchar(tmp->n);
+				tmp = tmp->next;
+			}
+			else
+			{
+				break;
+			}
 		}
-		else
-		{
-			break;
-		}
+		putchar('\n');
 	}
-	putchar('\n');
 }
