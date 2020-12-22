@@ -78,6 +78,7 @@ void (*get_op_func(char *s, unsigned int linecounter))(stack_t **st, unsigned in
 	{"div", op_div},
 	{"mul", op_mul},
 	{"mod", op_mod},
+	{"#", op_comm},
 	{NULL, NULL}
 	};
 	int i = 0;
