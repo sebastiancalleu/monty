@@ -32,7 +32,7 @@ void op_swap(stack_t **st, unsigned int linecounter)
 
 	if (stackelements(st) < 2)
 	{
-		fprintf(stderr, "L%d: can't swap, stack too short", linecounter);
+		fprintf(stderr, "L%d: can't swap, stack too short\n", linecounter);
 		free(strge.bufcop);
 		freeall(st);
 		exit(EXIT_FAILURE);
