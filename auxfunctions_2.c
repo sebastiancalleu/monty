@@ -59,9 +59,7 @@ int stackelements(stack_t **st)
 
 void op_nop(stack_t **st, unsigned int linecounter)
 {
-	if (st)
-	{}
-	if (linecounter)
-	{}
+	(void)st;
+	(void)linecounter;
 }
 
