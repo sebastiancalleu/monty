@@ -13,13 +13,15 @@ int wrdcounter(char *str)
 	}
 	return (b);
 }
-
 void free_arr(char **array, int n)
 {
 	int a = 0;
-	for (a = 0; a < n; a++)
+	if (array)
 	{
-		free(array[a]);
+		for (a = 0; a < n; a++)
+		{
+			free(array[a]);
+		}
 	}
 }
 

@@ -53,7 +53,7 @@ void op_pall(stack_t **, unsigned int);
 
 /*auxfunctions_1.c */
 int wrdcounter(char *);
-void free_arr(char **, int);
+void free_arr(char **, int n);
 void freelist(stack_t **);
 unsigned int countdigs(int);
 

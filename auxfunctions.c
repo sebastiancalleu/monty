@@ -24,6 +24,8 @@ int openfile(char **argv, stack_t **st)
 	if (buffer)
 		free(buffer);
 		buffer = NULL;
+	/*free_arr(strge.arr_of_buff);
+	free (strge.arr_of_buff);*/
 	exit(EXIT_SUCCESS);
 }
 
@@ -37,7 +39,7 @@ void executor(char *buffer, stack_t **st, unsigned int linecounter)
 	if (n > 2)
 		n = 2;
 	token = strtok(buffer, delim);
-	strge.arr_of_buff = malloc((n + 1) * sizeof(char));
+	strge.arr_of_buff = calloc((n + 1), sizeof(char));
 	if (strge.arr_of_buff == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
@@ -45,7 +47,7 @@ void executor(char *buffer, stack_t **st, unsigned int linecounter)
 	}
 	while(token != NULL)
 	{
-		strge.arr_of_buff[a] = malloc((strlen(token) + 1) * sizeof(char));
+		strge.arr_of_buff[a] = calloc((strlen(token) + 1), sizeof(char));
 		if (strge.arr_of_buff[a] == NULL)
 		{
 			fprintf(stderr, "Error: malloc failed\n");
@@ -107,6 +109,8 @@ void op_push(stack_t **st, unsigned int linecounter)
 	new->n = a;
 	new->prev = NULL;
 	new->next = *st;
+	if (*st != NULL)
+		(*st)->prev = new;
 	*st = new;
 }
 
